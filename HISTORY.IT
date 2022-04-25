@@ -1,0 +1,163 @@
+**    Version 3.2 (2018-11-14)
+
+    Changes
+
+	01. Seguito le indicazioni di Brad Gass sui possibili valori del parametro topology nel server VPN (di tipo tun) e relativa modifica.
+	    Rimosso salvataggio di tale opzione in caso di server tap.
+	02. Aggiornato interfaccia WEB con l'utilizzo delle funzioni di visualizzazioni HTML di Webmin.
+
+    Bugs
+
+	01. Adeguamento interfaccia a nuova politica restrittiva sull'uso delle form HTML da parte di Webmin.
+	02. Aggiornamento della Modifica del Client VPN in visualizzazione ed in salvataggio in modo che i dati automatici del server 
+	    vengano adeguatamente segnalati in interfaccia e salvati di conseguenza (grazie a segnalazione di Brad Gass).
+	03. Modificati i paths degli script di bridge con il path standard di Webmin (segnalazione di Michele Mauro).
+	04. Seguendo l'indicazione di Michele Giorato, aggiornato la lettura delle ethernet tramite la funzione ReadEths per CentOS Linux 7.3.
+	05. Aggiornato i comandi in action_vpn.cgi (eliminando sprintf) come indicato da Aslan.
+	06. Come suggerito da Francois Gendron, nei campi compilati di CA permessa l'introduzione del carattere ' senza
+	    per questo creare problematiche.
+
+**    Version 3.1 (2017-07-04)
+
+    Changes
+
+	01. Seguito le indicazioni di Fulvio Fusco per ottimizzare il codice (attraverso la creazione di alcune subroutine).
+	02. Aggiunto nella configurazione di un server vpn la sezione per i comandi down-root (come suggerito da Fulvio Fusco).
+	03. Modificate le stringhe dei comandi start_cmd, stop_cmd e status_cmd (come suggerito da Falco Vennedey e segnalato da Bennie Sexton).
+	04. Aggiunto paraetro topology nella creazione del server VPN (come segnalato da Björn Gaul)
+
+    Bugs
+
+	01. Modificato la stringa di ricerca relativa al comando utilizzato per ottenere la lista degli argomenti di cifratura ('openvpn --show-ciphers'),
+            come indicato da Andy Wright, Fulvio Fusco, Brad Gass e Stefano Buelow.
+
+
+**    Version 3.0 (2017-02-23)
+
+    Changes
+
+	01. Modifica a funzione is_openvpn_running per diverso funzionamento di find_byname da webmin 1.380 in poi (segnalazione di Roberto Resoli).
+	02. Implementazione textarea static key in VPN statica (patch di Olivier Beaudet).
+        03. Patch di Pierpaolo Palazzo: modifica ad alcune librerie per rendere utilizzabile anche su CentOS.
+	04. Il prefisso dei PID files dei processi OpenVPN e' configurabile (patch di Percivaldi Daniele).
+	05. Modifica configurazione "down_root_plugin" per openvpn 2.3.3 (come suggerito da Percivaldi Daniele).
+	06. Modifica lettura di parametro expired di ca in modo che funzioni sia se la data e' indicata con anno in 4 cifre 
+	    (come suggerito da Florian Lagg | IT-Valentin.at e Giuseppe Setteducati) che se la data e' indicata con anno in 2 cifre (come era da noi).
+	07. Rimossa possibilita' di creazione chiavi e ca a 1024 bit.
+	08. Nuova versione del file openvpn-ssl.cnf.
+	09. Compatibile con debian8.
+
+    Bugs
+    
+	01. Correzione definizione di parametro proto in creazione file di configurazione di VPN nel caso di proto TCP (come suggerito da Alexander Predeschly).
+
+**    Version 2.6 (2013-04-04)
+
+    Bugs
+
+	01. Nuovo file openvpn-ssl.cnf.
+
+**    Version 2.5 (2007-06-05)
+
+    Changes
+
+	01. Introdotta assegnazione automatica e interattiva numeri dispositivi (tun0,tun1,etc).
+	02. Aggiunto default server in configurazione modulo per accelerare creazione clients.
+	03. Modificato device su client: preimposta tun o tap in funzione del server.
+	04. Impostate tutte le textarea come wrap=off.
+	05. Modificato controllo nome chiave,server,client (come suggerito da H. Spaethe).
+	06. Aggiunti files di configurazione per netbsd ed openbsd.
+	07. Migliorato skin di form di vpn server static.
+	08. Introdotte modifiche a dispositivo tap (patch di H. Spaethe).
+	09. Aggiunta traduzione us (Richard Geoffrion).
+    
+    Bugs
+
+	01. Risolto baco su local che non veniva letto correttamente in interfaccia di modifica.
+	02. Corretto baco in assegnazione reti di trasporto quando vuote.
+	03. Corretto baco in configurazione che non permetteva di usare freebsd.
+
+**    Version 2.01 (23-03-2007)
+
+    Bugs
+
+	01. Sistemato baco su tcp-client in clients che deve inserire automaticamente a posto
+	    di tcp-server nel caso il server sia proprio tcp-server.
+
+**    Version 2.0 (01-12-2006)
+
+    Changes
+
+	01. Aggiunto file di configurazione per freebsd fornito da Gustavo Fukao
+	02. Aggiunto link a clients di openvpn in schermata clientlist_vpn.cgi
+	03. Per disconnettere un utente da connessioni attive rimuovo solamente
+            il file ccd corrispondente invece che cancellare il client stesso.
+	04. Sistemazione codice per la traduzione degli errori nella nuova patch di H. Spaethe.
+
+    Changes da parte di H. Spaethe
+
+	01. Aggiunti elementi della form necessari per il bridge device ('bridge device name',
+	    'network device to bridge','bridge ip','bridge netmask','bridge ip-pool-start/end')
+	02. Implementazione "automatica" di start/stop del bridge allo start/shutdown del server
+	03. Aggiunti elementi per i path degli script di start/end nella sezione configurazione del modulo
+	04. Aggiunto il path per down-root.so nella sezione configurazione del modulo (questo e' necessario
+	    se si vuole riconfigurare il device ethernet automatico allo stop del bridge)
+
+    Bugs da parte di H. Spaethe
+
+	01. Corretto il controllo di ip/network/netmask check (did not work)
+        02. Modificato il codice di generazione degli script di up/down/up-pre/down-pre (aggiunta bash-shebang)
+
+    Bugs
+
+	01. Rimosso controllo su nome client in creazione del client inutile perche' 
+	    coincide con il nome della chiave
+
+**    Version 1.04 (21-03-2006)
+
+    Changes
+
+	01. Aggiunta creazione file up e down .bat per windows (caratteri dos) 
+	    all'esportazione del client.
+	02. Modificato i valori di proto con protocollo tcp in tcp-server. 
+	    ed aggiunto tcp-client.
+	03. Aggiunta possibilita di creazione chiave per client senza password.
+
+**    Version 1.03 (09-03-2006)
+
+    Changes
+
+	01. Aggiunta traduzione in tedesco e modificata traduzione in inglese
+	    da parte di H. Spaethe (Ivan Dolvich).
+
+**    Version 1.02 (24-02-2006)
+
+    Changes
+
+	01. Effettuate modifiche per permettere di avere lo stesso client su 2 vpn 
+	    diverse (ccd-exclusive): rimossa revoca chiave alla cancellazione del client; 
+	    alla creazione del client permetto di utilizzare tutte le chiavi disponibili 
+	    tranne quelle gia' utilizzate dai client di quel server.
+	02. Aggiunta possibilita' di editare il file ccd nella modifica e creazione del client.
+	03. Tolta creazione ed elminazione della ta.key dalla CA ed introduzione della 
+	    creazione-eliminazione della stessa nella cartella del server. 
+	    Modificata esportazione del client per prendere la ta.key dalla directory del server.
+
+    Bugs fixed
+
+	01. Corretto baco in creazione ta.key che ricreava la ta.key anche se gia' esistente. 
+	02. Spostato parametro mssfix dopo fragment e tun-mtu sia in interfaccia che in file di 
+	    configurazione di server e client
+
+**    Version 1.01 (23-01-2006)
+
+    Bugs fixed
+
+        01. Sistemazione lettura informazioni chiavi valide da file index.txt che non funzionava 
+	    in assenza di alcuni campi.
+
+**    Version 1.00 (18-01-2006)
+
+    Changes 
+
+        01. Versione iniziale

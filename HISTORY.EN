@@ -1,0 +1,162 @@
+**    Version 3.2 (2018-11-14)
+
+    Changes
+
+	01. Followed by Brad Gass on the possible values of the topology parameter in the VPN server (of type tun) and its modification.
+    	    Removed saving this option in case of tap server.
+        02. Updated WEB interface with the use of Webmin HTML visualization functions.
+
+    Bugs
+
+	01. Adaptation of the interface to a new restrictive policy on the use of HTML forms by Webmin.
+        02. Update of the modification of the VPN Client in view and in saving so that the automatic data of the server
+            are properly reported in the interface and saved accordingly (thanks to Brad Gass).
+        03. Modified the paths of the bridge scripts with the standard path of Webmin (signaling by Michele Mauro).
+        04. Following the indication of Michele Giorato, updated the ethernet reading through the ReadEths function for CentOS Linux 7.3.
+        05. Updated commands in action_vpn.cgi (eliminating sprintf) as indicated by Aslan.
+        06. As suggested by Francois Gendron, in the compiled fields of CA allowed the introduction of the 'without' character
+            for this to create problems.
+
+**    Version 3.1 (2017-07-04)
+
+    Changes
+
+	01. Follow the instructions of Fulvio Fusco to optimize the code (through the creation of some subroutines).
+        02. Added in the configuration of a vpn server the section for down-root commands (as suggested by Fulvio Fusco).
+        03. Modify command strings start_cmd, stop_cmd, and status_cmd (as suggested by Falco Vennedey and reported by Bennie Sexton).
+        04. Added topology pareter in creating the VPN server (as reported by Björn Gaul)
+
+    Bugs
+
+	01. Modified the search string for the command used to get the list of encryption arguments ('openvpn --show-ciphers'),
+            as indicated by Andy Wright, Fulvio Fusco, Brad Gass and Stefano Buelow.
+
+**    Version 3.0 (2017-02-23)
+
+    Changes
+
+	01. Modfiy is_openvpn_running function for webmin 1.380 and later (as suggested by Roberto Resoli).
+	02. Implementation of static key textarea in static VPN (patch di Olivier Beaudet). 
+        03. Pierpaolo Palazzo's Patch: New modifications to library for use on CentOS.
+	04. The PID file prefix of OpenVPN processes is configurable (patch of Percivaldi Daniele).
+        05. Configuration "down_root_plugin" modified for openvpn 2.3.3 (as suggested by Percivaldi Daniele).
+        06. Modify of reading ca option expired so that it works is if the year date is shown in 4-digit (as suggested by Florian Lagg | IT-Valentin.at and Giuseppe Setteducati)
+    	    that if the year date is indicated with two-digit (as it was from us).
+        07. Remove option 1024 bit in creation keys and ca.
+        08. New file openvpn-ssl.cnf.
+	09. Compatible with debian8.
+
+    Bugs
+
+        01. Resolved configuration proto TCP (as suggested by Alexander Predeschly).
+
+
+**    Version 2.6 (2013-04-04)
+
+    Bugs
+
+        01. New file openvpn-ssl.cnf.
+
+
+**    Version 2.5 (2007-06-05)
+
+    Changes
+
+        01. The device number (tun0, tun1, ...) is automatically added and interactivly modifiable.
+        02. In the module configuration area the default server has been added as a new 
+	    item. This addition will quick up the clients creation.
+        03. Device setting: the module set it to tun o tap, based on the server setting.  
+        04. Added a new textarea attribute: wrap="off"
+        05. Test of validity of key, server, client modified as suggested by H. Spaethe.
+        06. Added new config files for netbsd and openbsd.
+        07. Adapted server static form to the webmin skins.
+        08. New modifications to tap device (patch of H. Spaethe).
+	09. Added us translation (Richard Geoffrion).
+
+    Bugs
+
+        01. Resolved bug on local.
+        02. Resolved loop on assignment of network/netmask when not defined.
+        03. Resoved anti freebsd config bug.
+
+**    Version 2.01 (23-03-2007)
+
+    Bugs
+
+        01. Resolved bug on export of client in case of tcp-server.
+
+
+**    Version 2.0 (01-12-2006)
+
+    Changes
+
+	01. Added the freebsd configuration file (thanks to Gustavo Fukao)
+	02. Added a link to openvpn clients inside clientlist_vpn.cgi
+	03. To disconnect a user with active connection remove the file ccd
+	    instead removing the client.
+	04. The new patch of H. Spaethe fix some code for the error translation
+
+    Changes for H. Spaethe
+
+        01. Added form elements needed for bridge control ('bridge device name',
+            'network device to bridge','bridge ip','bridge netmask','bridge ip-pool-start/end')
+        02. "Automatic" start/stop of bridge on server start/shutdown
+        03. Added path of start/end-script to the module config section
+        04. Added path of down-root.so to the module config section (this is  needed
+            if you want to reconfigure the ethernet device automatic on  bridge stop)
+
+    Bugs fixed for H. Spaethe
+
+        01. Fixed the ip/network/netmask check (did not work)
+        02. Modified up/down/up-pre/down-pre - script generation code (added bash-shebang)
+
+    Bugs
+
+	01. When you create the client the client name control has been removed.
+
+**    Version 1.04 (21-03-2006)
+
+    Changes
+
+        01. Added the creation of the up and down MSWIN file .bat when the client is exported.   
+	02. Modified the values of the proto variable: tcp has been changed into tcp-server,
+	    and the value tcp-client has been added. 
+	03. Now you can create the client key without the password.
+
+**    Version 1.03 (09-03-2006)
+
+    Changes
+
+	01. Added the german and the english translation realized by Ivan Dolvich.
+
+**    Version 1.02 (24-02-2006)
+
+    Changes
+
+	01. Now you can have 2 vpn on the same client (ccd-exclusive):
+	    when you remove the client the key will not be revoked;  	 
+	    when you create a new client it is possible to choose a key from all the available keys 
+	    with the exception of the ones already used by an other client on the same server.
+	02. Now you can edit the cdd file during the creation and the modification of the client.
+	03. The ta.key file is moved from the CA dir to the server dir.
+	    The ta.key is not created when you create the CA but when you manage your server.
+	    The ta.key file now is exported from the server dir even when you export your client.
+
+    Bugs fixed
+
+	01. Bug fixed in ta.key creation: ta.key is created only if it is not present.
+
+	02. The mssfix parameter has been set after fragment and tun-mtu parameters, even in the GUI
+	    and in server and client config file. 
+
+**    Version 1.01 (23-01-2006)
+
+    Bugs fixed
+
+        01. Fixed the key file read when some fields were missed.
+
+**    Version 1.00 (18-01-2006)
+
+    Changes 
+
+        01. Initial revision
