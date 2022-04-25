@@ -93,9 +93,8 @@ foreach $key (sort keys %{$listvpn}) {
 	    if ($$listvpn{$key}{VPN_STATUS} == 0) {
 		print "<td>&nbsp;</td>\n";
 	    } else {
-		print "<td nowrap><a href=\"action_vpn.cgi?action=start&vpn=".$$listvpn{$key}{VPN_NAME}."\" title=\"".$text{'startvpn'}."\"><SPAN STYLE=\"color:red\">".$text{'start'}."</span></a>   <a href=\"action_vpn.cgi?action=stop&vpn=".$$listvpn{$key}{VPN_NAME}."\" title=\"".$text{'stopvpn'}."\">".$text{'stop'}."</a></td>\n";
-
-            }
+		print "<td nowrap><a href=\"action_vpn.cgi?action=start&vpn=".$$listvpn{$key}{VPN_NAME}."\" title=\"".$text{'startvpn'}."\"><SPAN STYLE=\"color:red\">".$text{'start'}."</span></a></td>\n";
+	    }
 	}
     print "</tr>\n";
 }
